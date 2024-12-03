@@ -4,26 +4,45 @@
 
 {% load crispy_forms_tags %}
 
-<h3>LOGIN</h3>
+<h3>REGISTRO</h3>
 
 <br>
 
 <form action="" method="post">
     {% csrf_token %}
 
-    <div class="card mx-auto" style="width: 30rem;">
+    <div class="card mx-auto" style="width: 60rem;">
         <div class="card-body">
           <h5 class="card-title">Complete todos los campos</h5>
-          {{ form | crispy }}
+          <div class="row">
+            <div class="col-md-4">
+              {{ form.username | as_crispy_field }}
+              {{ form.email | as_crispy_field }}
+              {{ form.password1 | as_crispy_field }}
+              {{ form.password2 | as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+              {{ form.first_name | as_crispy_field }}
+              {{ form.last_name | as_crispy_field }}
+              {{ form.cedula | as_crispy_field }}
+              {{ form.nacionalidad | as_crispy_field }}
+              {{ form.fecha_nacimiento | as_crispy_field }}
+              {{ form.direccion | as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+              {{ form.facebook | as_crispy_field }}
+              {{ form.instagram | as_crispy_field }}
+              {{ form.tiktok | as_crispy_field }}
+              {{ form.twitter | as_crispy_field }}
+              {{ form.descripcion | as_crispy_field }}
+            </div>
+          </div>
           <a href="{% url "home" %}" class="card-link">Inicio</a>
           <a href="{% url "login" %}" class="card-link">Iniciar sesión</a>
           <a href="#" class="card-link">¿Contraseña olvidada?</a>
-          <button class="btn btn-sm btn-primary float-end" type="submit">Registrarse</button>
-          
+          <button class="btn btn-lg btn-primary float-end" type="submit">Registrarse</button>
         </div>
-        
     </div>
-   
 </form>
 
 {% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Puedes agregar tus estilos CSS aquí */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #dddddd;
+        }
+        .header {
+            text-align: center;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #777777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>¡Bienvenido a Nuestro Sitio!</h1>
+        </div>
+        <div class="content">
+            <p>Hola {{ user.first_name }}!,</p>
+            <p>Gracias por registrarte en nuestro sitio. ¡Esperamos que disfrutes tu experiencia!</p>
+            <img src="https://i.imgur.com/d7SrNWB.jpeg" alt="Logo" style="max-width: 100%; height: auto;">
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Nuestro Sitio. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>

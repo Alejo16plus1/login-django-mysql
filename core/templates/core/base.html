@@ -17,6 +17,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class='container'>
+          
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="{% url 'home' %}">Mi Proyecto</a>
@@ -36,25 +37,31 @@
                       </li>
 
                         {% comment %} Verifica si el usuario está autenticado o no, cambiando los items de la lista {% endcomment %}
-                      {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url "exit" %}">Salir</a>
+                          <a class="nav-link" href="{% url 'myprofile' %}">Mi Perfil</a>
                         </li>
-                      {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Ingresar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
-                        </li>
-                      {% endif %}
+                          <li class="nav-item">
+                            <a class="nav-link" href={% url 'exit' %}>Salir</a>
+                          </li>
+    
+                        {% else %}
+                          <li class="nav-item">
+                            <a class="nav-link" href={% url 'login' %}>Ingresar</a>
+                          </li>
+    
+                          <li class="nav-item">
+                            <a class="nav-link" href={% url 'register' %}>Registrarse</a>
+                          </li>
+    
+                    {% endif %}
 
                     </ul>
                   </div>
                 </div>
               </nav>
-            <h2>Inicio</h2>
-            {% block content %}{% endblock %}
+              <h2>Inicio</h2>
+        {% block content %}{% endblock %}
         </div>
 
         <script src="" async defer></script>
