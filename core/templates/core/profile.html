@@ -13,7 +13,14 @@
                         <h5>Información de la Cuenta</h5>
                         <p><strong>Nombre de Usuario:</strong> {{ user.username }}</p>
                         <p><strong>Email:</strong> {{ user.email }}</p>
-                        <p><strong>Contraseña:</strong> ********</p> <!-- No se muestra la contraseña por seguridad -->
+                         
+                        
+                        {%if user.capturas.archivo is not empty%}
+                        <p><strong>URL de su Página:</strong> {{user.perfilusuario.url}}</p>
+                        <p><strong>Imagen de página</strong></p>
+                        {% load static %}
+                        <img src="{% static user.capturas.archivo %}" alt="Captura de {{ user.username }}" style="width:70%; border-color: black;">
+                        {%endif%}
                     </div>
                     <div class="col-md-4">
                         <h5>Información Personal</h5>
@@ -21,6 +28,7 @@
                         <p><strong>Apellido:</strong> {{ user.last_name }}</p>
                         <p><strong>Cédula:</strong> {{ user.perfilusuario.cedula }}</p>
                         <p><strong>Nacionalidad:</strong> {{ user.perfilusuario.nacionalidad }}</p>
+                        <p><strong>Descripción Personal:</strong> {{user.perfilusuario.descripcion | safe}} </p>
                     </div>
                     <div class="col-md-4">
                         <h5>Información Adicional</h5>

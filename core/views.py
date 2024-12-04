@@ -64,12 +64,17 @@ def register(request):
                 url=user_creation_form.cleaned_data['url']
             )
 
-            archivo = user_creation_form.cleaned_data['url']
-            nombre_archivo = f"core/imagenes/{user.username}_{uuid.uuid4().hex}.jpg"
-            config = imgkit.config(wkhtmltoimage="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe")
-            imgkit.from_url(archivo, nombre_archivo, config=config)
-            Capturas.objects.create(usuario=user, archivo=nombre_archivo)
             
+            archivo = user_creation_form.cleaned_data['url']
+            nombre_archivo = f"{user.username}_{uuid.uuid4().hex}.jpg"
+            config = imgkit.config(wkhtmltoimage="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe")
+            
+            
+            try:
+                imgkit.from_url(archivo, nombre_archivo, config=config)
+                Capturas.objects.create(usuario=user, archivo=nombre_archivo)
+            except Exception as e:
+                messages.error(request, f"Error generando la captura: {e}")
             
                 
 

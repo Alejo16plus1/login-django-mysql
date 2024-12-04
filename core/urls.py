@@ -17,6 +17,8 @@ Including another URLconf
 from django.urls import path
 from .views import home, cursos, exit, register, myprofile, activate, eleccion, pregunta, recuperar_preguntas, reestablecer_contrasena # Asegúrate de importar la vista activate
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -35,6 +37,7 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),  # Añade esta línea para la URL de activación
 ]
+
 
 
 

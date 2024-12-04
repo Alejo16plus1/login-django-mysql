@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Complete las preguntas de seguridad</h2>
+
+<form method="post" action="{%url 'recuperar_preguntas' aux=0 %}">
+    {% csrf_token %}
+    <label for="usuario">Introduzca su nombre de usuario</label>
+    <input type="text" name="usuario" id="" required>
+    {% for pregunta in preguntas %}
+        <label for="{{ pregunta.id }}">{{ pregunta }}</label>
+        <input type="text" name="{{ pregunta.id }}" id="pregunta_{{ pregunta.id }}" required />
+    {% endfor %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}

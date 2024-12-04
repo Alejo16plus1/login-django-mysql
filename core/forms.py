@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import PerfilUsuario, Preg_user, Preguntas
 from datetime import date
+import bleach
 
 class CustomUserCreationForm(UserCreationForm): 
     NACIONALIDADES_CHOICES = [ ('VE', 'Venezuela'), 
@@ -29,12 +30,49 @@ class CustomUserCreationForm(UserCreationForm):
         widgets = {
             'descripcion': forms.PasswordInput(attrs={'class': 'form-control form-control-sm'})
         }
-        
+
+    #validacion de fecha de nacimiento    
     def clean_fecha_nacimiento(self): 
         fecha_nacimiento = self.cleaned_data['fecha_nacimiento'] 
         if fecha_nacimiento and fecha_nacimiento > date.today(): 
             raise forms.ValidationError("La fecha de nacimiento no puede ser una fecha futura.") 
         return fecha_nacimiento
+    # Validacion de cedula
+    def clean_cedula(self):
+        cedula = self.cleaned_data['cedula']
+        if PerfilUsuario.objects.filter(cedula=cedula).exists():
+            raise forms.ValidationError('El número de cedula ya se encuentra registrado')
+        return cedula
+    # validar url
+    def clean_url(self):
+        url = self.cleaned_data.get('url', '')
+        if url and not url.startswith('https://'):
+            raise forms.ValidationError('La URL debe comenzar con "https://".')
+        return url
+        
+    # #validacion de correo temporalmente comentado
+    # def clean_email(self):
+    #     email=self.cleaned_data['email']
+    #     if User.objects.filter(email=email).exists():
+    #         raise forms.ValidationError('Este correo ya está registrado')
+          #return email
+    
+    # def clean_descripcion(self):
+    #     descripcion=self.cleaned_data.get('descripcion', '')
+
+    #     etiquetas_permitidas =[
+    #         'b','i','u','a','p','br','strong', 'em', 'mark'
+    #     ]
+    #     atributos_permitidos={
+    #         'a' : ['href','tittle','target']
+    #     }
+
+    #     descripcion_depurada= bleach.clean(
+    #         descripcion, tags=etiquetas_permitidas, attributes=atributos_permitidos, strip=True
+    #     )
+    #     return descripcion_depurada
+
+    
     
 class PasswordResetForm(forms.Form):
     nueva_password = forms.CharField(

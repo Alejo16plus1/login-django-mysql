@@ -21,7 +21,7 @@ class PerfilUsuario(models.Model):
     tiktok = models.CharField(max_length=20, null=True, blank=True)
     twitter = models.CharField(max_length=20, null=True, blank=True)
     descripcion = models.CharField(max_length=250, null=True, blank=True)
-    # url = models.URLField(max_length=500, null=True, blank=True)
+    url = models.URLField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -51,3 +51,9 @@ class Preg_user(models.Model):
         
         preguntas_respondidas = Preg_user.objects.filter(usuario=usuario).count()
         return preguntas_respondidas == 4
+    
+#modelo de capturas
+class Capturas(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    archivo = models.CharField(max_length=255)  
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
