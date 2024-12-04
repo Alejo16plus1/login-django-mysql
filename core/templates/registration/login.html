@@ -15,9 +15,9 @@
         <div class="card-body">
           <h5 class="card-title">Ingrese sus Credenciales</h5>
           {{ form | crispy }}
-          <a href="{% url "home" %}" class="card-link">Inicio</a>
-          <a href="{% url "register" %}" class="card-link">Registrarse</a>
-          <a href="{% url "password_reset" %}" class="card-link">¿Contraseña olvidada?</a>
+          <a href="{% url 'home' %}" class="card-link">Inicio</a>
+          <a href="{% url 'register' %}" class="card-link">Registrarse</a>
+          <a href="{% url 'eleccion' %}" class="card-link">¿Contraseña olvidada?</a>
           <button class="btn btn-sm btn-primary float-end" type="submit">Iniciar Sesión</button>
         </div>
         
