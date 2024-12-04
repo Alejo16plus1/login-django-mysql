@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.redirect_preguntas',
 ]
 
 ROOT_URLCONF = 'logintarea.urls'
@@ -141,5 +142,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'tucorreo@gmail.com'
-EMAIL_HOST_PASSWORD = 'tuclave'
+EMAIL_HOST_USER = 'eugenionpetita@gmail.com'
+EMAIL_HOST_PASSWORD = 'bfthqgqbdmcrhmju'
+DEFAULT_FROM_EMAIL = 'el eqüipo'
