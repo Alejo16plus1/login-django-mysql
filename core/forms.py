@@ -21,11 +21,11 @@ class CustomUserCreationForm(UserCreationForm):
     tiktok = forms.CharField(max_length=20, required=False)
     twitter = forms.CharField(max_length=20, required=False)
     descripcion = forms.CharField(max_length=250, required=False, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
-    # url = forms.URLField(max_length=500, required=False)
+    url = forms.URLField(max_length=255, required=False)
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'cedula', 'nacionalidad', 'fecha_nacimiento', 'direccion', 'facebook', 'instagram', 'tiktok', 'twitter', 'descripcion']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'cedula', 'nacionalidad', 'fecha_nacimiento', 'direccion', 'facebook', 'instagram', 'tiktok', 'twitter', 'descripcion','url']
         widgets = {
             'descripcion': forms.PasswordInput(attrs={'class': 'form-control form-control-sm'})
         }
@@ -35,6 +35,28 @@ class CustomUserCreationForm(UserCreationForm):
         if fecha_nacimiento and fecha_nacimiento > date.today(): 
             raise forms.ValidationError("La fecha de nacimiento no puede ser una fecha futura.") 
         return fecha_nacimiento
+    
+class PasswordResetForm(forms.Form):
+    nueva_password = forms.CharField(
+        label="Nueva contraseña",
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        min_length=8,
+        required=True
+    )
+    confirmar_password = forms.CharField(
+        label="Confirmar contraseña",
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        nueva_password = cleaned_data.get("nueva_password")
+        confirmar_password = cleaned_data.get("confirmar_password")
+
+        if nueva_password != confirmar_password:
+            raise forms.ValidationError("Las contraseñas no coinciden.")
+        return cleaned_data
     
 # formulario para la creacion de preguntas de seguridad
 
