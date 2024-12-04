@@ -15,6 +15,6 @@ class redirect_preguntas:
             ]
             # Verificar si el usuario no ha completado las preguntas y no está en una ruta excluida
             if not Preg_user.preguntas_completadas(request.user) and request.path not in excluded_paths:
-                return redirect('preguntas_seguridad')  # Redirigir al formulario de preguntas
+                return redirect('pregunta')  # Redirigir al formulario de preguntas
 
         return self.get_response(request)
