@@ -15,12 +15,12 @@
                         <p><strong>Email:</strong> {{ user.email }}</p>
                          
                         
-                        {%if user.capturas.archivo is not empty%}
+                        
                         <p><strong>URL de su Página:</strong> {{user.perfilusuario.url}}</p>
                         <p><strong>Imagen de página</strong></p>
                         {% load static %}
                         <img src="{% static user.capturas.archivo %}" alt="Captura de {{ user.username }}" style="width:70%; border-color: black;">
-                        {%endif%}
+                        
                     </div>
                     <div class="col-md-4">
                         <h5>Información Personal</h5>
