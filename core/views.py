@@ -10,6 +10,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site
 from .models import PerfilUsuario, Preg_user, Preguntas, Capturas
 from django.contrib.auth.models import User
+from .forms import EditProfileForm
 from .tokens import account_activation_token  # Asegúrate de importar tu generador de tokens
 from django.contrib import messages #mensajes de error
 #resetear contraseña
@@ -18,6 +19,9 @@ from django.contrib.auth.hashers import make_password
 import imgkit
 import uuid
 
+
+def nosotros(request):
+    return render(request, 'core/nosotros.html')
 
 
 User = get_user_model()
@@ -236,4 +240,29 @@ def reestablecer_contrasena(request):
         form = PasswordResetForm()
     
     return render(request, 'registration/reestablecer_contrasena.html', {'form': form})
+
+
+from .models import PerfilUsuario
+#Edición de perfil
+@login_required
+def edit_profile(request):
+    try:
+        perfil = request.user.perfilusuario
+    except PerfilUsuario.DoesNotExist:
+        perfil = PerfilUsuario(user=request.user)
+
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=perfil)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Perfil actualizado con éxito')
+            return redirect('myprofile')
+    else:
+        form = EditProfileForm(instance=perfil)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'core/edit_profile.html', context)
+
 

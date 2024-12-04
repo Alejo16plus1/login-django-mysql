@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import home, cursos, exit, register, myprofile, activate, eleccion, pregunta, recuperar_preguntas, reestablecer_contrasena # Asegúrate de importar la vista activate
+from .views import home, cursos, exit, register, myprofile, activate, eleccion, pregunta, recuperar_preguntas, reestablecer_contrasena, edit_profile, nosotros 
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -35,7 +35,9 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
-    path('activate/<uidb64>/<token>/', activate, name='activate'),  # Añade esta línea para la URL de activación
+    path('activate/<uidb64>/<token>/', activate, name='activate'), 
+    path('profile/edit/', edit_profile, name='edit_profile'),
+    path('nosotros/', nosotros, name='nosotros'),
 ]
 
 

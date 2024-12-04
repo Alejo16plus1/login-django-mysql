@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-white">
+            <h3>Editar Perfil</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control form-control-sm" id="direccion" name="direccion" value="{{ form.direccion.value|default_if_none:'' }}">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="facebook" class="form-label">Facebook</label>
+                        <input type="text" class="form-control form-control-sm" id="facebook" name="facebook" value="{{ form.facebook.value|default_if_none:'' }}">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="instagram" class="form-label">Instagram</label>
+                        <input type="text" class="form-control form-control-sm" id="instagram" name="instagram" value="{{ form.instagram.value|default_if_none:'' }}">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="twitter" class="form-label">Twitter</label>
+                        <input type="text" class="form-control form-control-sm" id="twitter" name="twitter" value="{{ form.twitter.value|default_if_none:'' }}">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="tiktok" class="form-label">TikTok</label>
+                        <input type="text" class="form-control form-control-sm" id="tiktok" name="tiktok" value="{{ form.tiktok.value|default_if_none:'' }}">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control form-control-sm" id="descripcion" name="descripcion" value="{{ form.descripcion.value|default_if_none:'' }}">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-sm">Guardar cambios</button>
+                    <a href="{% url 'myprofile' %}" class="btn btn-secondary btn-sm">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
+

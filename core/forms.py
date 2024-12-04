@@ -119,3 +119,15 @@ class PasswordResetForm(forms.Form):
     #     labels = {
     #         'pregunta': 'Selecciona una pregunta de seguridad',
     #         'respuesta': 'Escribe tu respuesta'
+
+    #Edición de usuario
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = PerfilUsuario
+        fields = ['direccion', 'facebook', 'instagram', 'twitter', 'tiktok', 'descripcion']
+    
+    def __init__(self, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields['descripcion'].widget.attrs.update({'class': 'form-control form-control-sm'})
+
