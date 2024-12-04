@@ -21,6 +21,7 @@ class PerfilUsuario(models.Model):
     tiktok = models.CharField(max_length=20, null=True, blank=True)
     twitter = models.CharField(max_length=20, null=True, blank=True)
     descripcion = models.CharField(max_length=250, null=True, blank=True)
+    # url = models.URLField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.user.username

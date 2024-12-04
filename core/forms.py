@@ -21,6 +21,7 @@ class CustomUserCreationForm(UserCreationForm):
     tiktok = forms.CharField(max_length=20, required=False)
     twitter = forms.CharField(max_length=20, required=False)
     descripcion = forms.CharField(max_length=250, required=False, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+    # url = forms.URLField(max_length=500, required=False)
 
     class Meta:
         model = User
