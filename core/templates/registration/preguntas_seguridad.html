@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h2>Rellene sus preguntas de seguridad</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% for pregunta in preguntas %}
+        <label for="{{ pregunta.id }}">{{ pregunta }}</label>
+        <input type="text" name="{{ pregunta.id }}" id="pregunta_{{ pregunta.id }}" required />
+    {% endfor %}
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}
