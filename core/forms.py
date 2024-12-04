@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import PerfilUsuario
+from .models import PerfilUsuario, Preg_user, Preguntas
 from datetime import date
 
 class CustomUserCreationForm(UserCreationForm): 
@@ -35,3 +35,27 @@ class CustomUserCreationForm(UserCreationForm):
         if fecha_nacimiento and fecha_nacimiento > date.today(): 
             raise forms.ValidationError("La fecha de nacimiento no puede ser una fecha futura.") 
         return fecha_nacimiento
+    
+# formulario para la creacion de preguntas de seguridad
+
+#*class preguntasform(forms.ModelForm):
+
+    # preguntas = Preguntas.objects.all()
+    # respuesta= []
+    # pregunta = []
+    # aux=1
+    # for aux1 in preguntas:
+    #     pregunta[aux]=aux1.Pregunta
+    #     respuesta[aux]= forms.CharField(max_length=30, required=True)
+    #     aux+=1
+
+    # class Meta:
+    #     model = Preg_user
+    #     fields = ['pregunta', 'respuesta']
+    #     widgets = {
+    #         'pregunta': forms.Select(attrs={'class': 'form-control'}),
+    #         'respuesta': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escribe tu respuesta aquí'}),
+    #     }
+    #     labels = {
+    #         'pregunta': 'Selecciona una pregunta de seguridad',
+    #         'respuesta': 'Escribe tu respuesta'
