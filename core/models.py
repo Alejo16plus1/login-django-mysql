@@ -25,3 +25,29 @@ class PerfilUsuario(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+# modelo para las preguntas de seguridad
+class Preguntas(models.Model):
+    OPCIONES_PREGUNTAS = [
+        ('color_favorito', 'Color favorito'),
+        ('auto_favorito', 'Auto favorito'),
+        ('segundo_nombre_papa_mama', 'Segundo nombre de papá/mamá'),
+        ('pelicula_favorita', 'Película favorita')
+    ]
+
+    Pregunta= models.CharField(max_length=30, choices=OPCIONES_PREGUNTAS)
+    def __str__(self):
+        # Devuelve el texto legible de la pregunta
+        return dict(self.OPCIONES_PREGUNTAS).get(self.Pregunta, self.Pregunta)
+
+# tabla intermedia entre user y preguntas
+class Preg_user(models.Model):
+    pregunta = models.ForeignKey(Preguntas, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    respuesta = models.CharField(max_length=30, null=False)
+    # funcion para definir si las preguntas llenas están completas
+    @staticmethod
+    def preguntas_completadas(usuario):
+        
+        preguntas_respondidas = Preg_user.objects.filter(usuario=usuario).count()
+        return preguntas_respondidas == 4
