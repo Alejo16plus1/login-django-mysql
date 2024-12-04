@@ -36,18 +36,10 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>¡Bienvenido a Nuestro Sitio!</h1>
-        </div>
-        <div class="content">
-            <p>Hola {{ user.first_name }}!,</p>
-            <p>Gracias por registrarte en nuestro sitio. ¡Esperamos que disfrutes tu experiencia!</p>
-            <img src="https://i.imgur.com/d7SrNWB.jpeg" alt="Logo" style="max-width: 100%; height: auto;">
-        </div>
-        <div class="footer">
-            <p>&copy; 2024 Nuestro Sitio. Todos los derechos reservados.</p>
-        </div>
-    </div>
+    <p>Hola {{ user.first_name }},</p>
+    <p>Gracias por registrarte. Por favor, haz clic en el enlace de abajo para activar tu cuenta:</p>
+    <p><a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Activa tu cuenta</a></p>
+    <p>¡Gracias!</p>
 </body>
 </html>
+
